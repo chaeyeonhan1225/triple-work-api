@@ -4,6 +4,7 @@ package com.interpark.tripleworkapi.domain
 import com.interpark.tripleworkapi.domain.param.TripParam
 import java.util.*
 import javax.persistence.*
+import kotlin.collections.Set
 
 @Entity
 class Trip(
@@ -27,6 +28,13 @@ class Trip(
     @Column
     var status: CommonState = CommonState.ACTIVE
         private set
+
+    @ElementCollection
+    @CollectionTable(name = "trip_city", joinColumns = [JoinColumn(name = "trip_id")])
+    var cityIds: Set<Long> = param.cityIds.map { it.toLong() }.toSet()
+
+    val representativeCityId
+        get() = cityIds.first()
 
 }
 
