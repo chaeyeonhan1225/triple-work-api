@@ -1,8 +1,8 @@
 package com.interpark.tripleworkapi.application
 
-import com.interpark.tripleworkapi.domain.City
-import com.interpark.tripleworkapi.domain.CityRepository
-import com.interpark.tripleworkapi.domain.TripRepository
+import com.interpark.tripleworkapi.domain.city.City
+import com.interpark.tripleworkapi.domain.city.CityRepository
+import com.interpark.tripleworkapi.domain.trip.TripRepository
 import com.interpark.tripleworkapi.domain.param.CityParam
 import com.interpark.tripleworkapi.domain.param.PlanParam
 import com.interpark.tripleworkapi.domain.param.TripParam

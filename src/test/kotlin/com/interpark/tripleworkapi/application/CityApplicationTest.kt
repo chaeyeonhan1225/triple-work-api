@@ -1,7 +1,7 @@
 package com.interpark.tripleworkapi.application
 
-import com.interpark.tripleworkapi.domain.CityRepository
-import com.interpark.tripleworkapi.domain.CommonState
+import com.interpark.tripleworkapi.domain.city.CityRepository
+import com.interpark.tripleworkapi.domain.common.CommonState
 import com.interpark.tripleworkapi.domain.param.CityParam
 import io.mockk.every
 import io.mockk.mockk

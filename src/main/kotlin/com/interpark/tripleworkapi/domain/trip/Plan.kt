@@ -1,4 +1,4 @@
-package com.interpark.tripleworkapi.domain
+package com.interpark.tripleworkapi.domain.trip
 
 import java.util.*
 import javax.persistence.Column

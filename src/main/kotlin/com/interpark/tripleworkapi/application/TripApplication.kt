@@ -1,12 +1,11 @@
 package com.interpark.tripleworkapi.application
 
-import com.interpark.tripleworkapi.domain.CityRepository
-import com.interpark.tripleworkapi.domain.Trip
-import com.interpark.tripleworkapi.domain.TripRepository
+import com.interpark.tripleworkapi.domain.city.CityRepository
+import com.interpark.tripleworkapi.domain.trip.Trip
+import com.interpark.tripleworkapi.domain.trip.TripRepository
 import com.interpark.tripleworkapi.domain.param.TripParam
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.stereotype.Service
-import java.util.IllegalFormatException
 
 @Service
 class TripApplication(

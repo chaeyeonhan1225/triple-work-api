@@ -1,5 +1,6 @@
-package com.interpark.tripleworkapi.domain
+package com.interpark.tripleworkapi.domain.city
 
+import com.interpark.tripleworkapi.domain.common.CommonState
 import com.interpark.tripleworkapi.domain.param.CityParam
 import javax.persistence.*
 

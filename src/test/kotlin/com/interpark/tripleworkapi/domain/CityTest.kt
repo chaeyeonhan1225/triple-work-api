@@ -1,5 +1,6 @@
 package com.interpark.tripleworkapi.domain
 
+import com.interpark.tripleworkapi.domain.city.City
 import com.interpark.tripleworkapi.domain.param.CityParam
 import org.junit.jupiter.api.Test
 

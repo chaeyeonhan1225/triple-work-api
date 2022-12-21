@@ -1,4 +1,4 @@
-package com.interpark.tripleworkapi.domain
+package com.interpark.tripleworkapi.domain.common
 
 enum class CommonState (
     val value: Int,

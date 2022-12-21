@@ -1,8 +1,8 @@
-package com.interpark.tripleworkapi.domain
+package com.interpark.tripleworkapi.domain.trip
 
 
+import com.interpark.tripleworkapi.domain.common.CommonState
 import com.interpark.tripleworkapi.domain.param.TripParam
-import java.util.*
 import javax.persistence.*
 import kotlin.collections.Set
 

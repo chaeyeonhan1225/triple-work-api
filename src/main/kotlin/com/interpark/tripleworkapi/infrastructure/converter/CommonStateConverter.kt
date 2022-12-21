@@ -1,6 +1,6 @@
 package com.interpark.tripleworkapi.infrastructure.converter
 
-import com.interpark.tripleworkapi.domain.CommonState
+import com.interpark.tripleworkapi.domain.common.CommonState
 import javax.persistence.AttributeConverter
 import javax.persistence.Converter
 

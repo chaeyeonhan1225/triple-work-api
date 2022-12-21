@@ -2,9 +2,8 @@ package com.interpark.tripleworkapi.controller
 
 import com.interpark.tripleworkapi.application.CityApplication
 import com.interpark.tripleworkapi.application.CityProvider
-import com.interpark.tripleworkapi.domain.City
+import com.interpark.tripleworkapi.domain.city.City
 import com.interpark.tripleworkapi.domain.param.CityParam
-import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
