@@ -13,9 +13,6 @@ class TripCity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-//    @Column(nullable = false)
-//    val tripId: Long = 0,
-
     @Column(nullable = false)
     val cityId: Long = 0,
 
@@ -25,4 +22,8 @@ class TripCity(
 ) {
     @Column
     var status: CommonState = CommonState.ACTIVE
+
+    fun delete() {
+        status = CommonState.DELETED
+    }
 }

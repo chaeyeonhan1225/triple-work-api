@@ -10,6 +10,8 @@ import io.mockk.every
 import io.mockk.mockk
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import java.util.Date
 
 class TripApplicationTest {
@@ -35,7 +37,7 @@ class TripApplicationTest {
 
         val testTripParam = TripParam(
             title = "테스트 여행",
-            cityIds = listOf("1"),
+            cityIds = listOf(1),
             plan = PlanParam(startedAt = Date(), endedAt = Date())
         )
 
@@ -55,11 +57,10 @@ class TripApplicationTest {
 
         val testTripParam = TripParam(
             title = "테스트 여행",
-            cityIds = listOf("1"),
+            cityIds = listOf(1),
             plan = PlanParam(startedAt = Date(), endedAt = Date())
         )
 
-        val newTrip = tripApplication.create(param = testTripParam)
-        Assertions.assertThat(newTrip.title).isEqualTo(testTripParam.title)
+        assertThrows<RuntimeException> {  tripApplication.create(param = testTripParam) }
     }
 }

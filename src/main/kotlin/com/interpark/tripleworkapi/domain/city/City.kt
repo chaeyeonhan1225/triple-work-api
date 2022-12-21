@@ -2,9 +2,11 @@ package com.interpark.tripleworkapi.domain.city
 
 import com.interpark.tripleworkapi.domain.common.CommonState
 import com.interpark.tripleworkapi.domain.param.CityParam
+import org.hibernate.annotations.Where
 import javax.persistence.*
 
 @Entity
+@Where(clause = "status > 0")
 class City(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

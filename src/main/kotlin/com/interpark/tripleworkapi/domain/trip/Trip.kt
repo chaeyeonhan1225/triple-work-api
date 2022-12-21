@@ -3,10 +3,11 @@ package com.interpark.tripleworkapi.domain.trip
 
 import com.interpark.tripleworkapi.domain.common.CommonState
 import com.interpark.tripleworkapi.domain.param.TripParam
+import org.hibernate.annotations.Where
 import javax.persistence.*
-import kotlin.collections.Set
 
 @Entity
+@Where(clause = "status > 0")
 class Trip(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,6 +47,7 @@ class Trip(
 
     fun delete() {
         status = CommonState.DELETED
+        citiesToTrip.forEach { it.delete() }
     }
 
 }
