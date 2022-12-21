@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional
 class CityProvider(
     private val repository: CityRepository
 ) {
+    // TODO: 조회 이벤트 추가
     fun findById(id: String): City {
         val cityId = id.toLong()
         return repository.findById(cityId).orElseThrow {

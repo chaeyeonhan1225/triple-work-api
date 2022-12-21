@@ -4,7 +4,7 @@ import java.util.Date
 
 data class TripParam(
     val title: String,
-    val cityIds: List<String>,
+    val cityIds: List<Long>,
     val plan: PlanParam
 )
 

@@ -29,17 +29,23 @@ class Trip(
     var status: CommonState = CommonState.ACTIVE
         private set
 
-    @ElementCollection
-    @CollectionTable(name = "trip_city", joinColumns = [JoinColumn(name = "trip_id")])
-    var cityIds: Set<Long> = param.cityIds.map { it.toLong() }.toSet()
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.MERGE])
+    @JoinColumn(name = "tripId")
+    var citiesToTrip: List<TripCity> = createCities(param.cityIds)
+        private set
 
-    val representativeCityId
-        get() = cityIds.first()
+    private fun createCities(cityIds: List<Long>): List<TripCity> {
+        return cityIds.mapIndexed { index, it -> TripCity(cityId = it, indexNo = index) }
+    }
 
     fun update(param: TripParam) {
         title = param.title
         plan = Plan(startedAt = param.plan.startedAt, endedAt = param.plan.endedAt)
-        cityIds = param.cityIds.map { it.toLong() }.toSet()
+        // cityIds = param.cityIds.map { it.toLong() }.toSet()
+    }
+
+    fun delete() {
+        status = CommonState.DELETED
     }
 
 }
