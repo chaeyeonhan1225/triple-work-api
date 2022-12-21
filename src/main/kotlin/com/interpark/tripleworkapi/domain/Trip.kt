@@ -36,5 +36,11 @@ class Trip(
     val representativeCityId
         get() = cityIds.first()
 
+    fun update(param: TripParam) {
+        title = param.title
+        plan = Plan(startedAt = param.plan.startedAt, endedAt = param.plan.endedAt)
+        cityIds = param.cityIds.map { it.toLong() }.toSet()
+    }
+
 }
 
