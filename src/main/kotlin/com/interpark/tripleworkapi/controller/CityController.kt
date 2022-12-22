@@ -4,6 +4,7 @@ import com.interpark.tripleworkapi.application.CityApplication
 import com.interpark.tripleworkapi.application.CityProvider
 import com.interpark.tripleworkapi.domain.city.City
 import com.interpark.tripleworkapi.domain.param.CityParam
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -38,8 +39,8 @@ class CityController(
         return service.update(id, param)
     }
 
-//    @DeleteMapping
-//    fun delete() {
-//
-//    }
+    @DeleteMapping("/{id}")
+    fun delete() {
+        service.delete(id = 1)
+    }
 }

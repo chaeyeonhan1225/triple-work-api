@@ -9,9 +9,9 @@ import javax.persistence.*
 @Entity
 @Where(clause = "status > 0")
 class Trip(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
+    @EmbeddedId
+    @AttributeOverride(name = "value", column = Column(name = "id", nullable = false))
+    val id: TripId,
 
     @Column
     val userId: Long = 0,
@@ -30,14 +30,17 @@ class Trip(
     var status: CommonState = CommonState.ACTIVE
         private set
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.MERGE])
-    @JoinColumn(name = "tripId")
-    var citiesToTrip: List<TripCity> = createCities(param.cityIds)
+    @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST, CascadeType.MERGE])
+    var citiesToTrip: List<TripCity> = param.cityIds.mapIndexed {
+        index, it -> createTripCity(cityId = it, indexNo = index)
+    }
         private set
 
-    private fun createCities(cityIds: List<Long>): List<TripCity> {
-        return cityIds.mapIndexed { index, it -> TripCity(cityId = it, indexNo = index) }
-    }
+    private fun createTripCity(cityId: Long, indexNo: Int): TripCity = TripCity(
+        cityId = cityId,
+        trip = this,
+        indexNo = indexNo
+    )
 
     fun update(param: TripParam) {
         title = param.title

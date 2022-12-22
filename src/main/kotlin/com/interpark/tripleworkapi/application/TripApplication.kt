@@ -4,6 +4,7 @@ import com.interpark.tripleworkapi.domain.city.CityRepository
 import com.interpark.tripleworkapi.domain.trip.Trip
 import com.interpark.tripleworkapi.domain.trip.TripRepository
 import com.interpark.tripleworkapi.domain.param.TripParam
+import com.interpark.tripleworkapi.domain.trip.TripId
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -18,8 +19,9 @@ class TripApplication(
         // TODO: 존재하지 않는 city면 Exception
         verifyCities(param.cityIds.map { it.toLong() })
 
+        val tripId = TripId(1)
         // TODO: 존재하지 않는 user면 Exception
-        val trip = Trip(param = param)
+        val trip = Trip(id = tripId, param = param)
         return repository.save(trip)
     }
 

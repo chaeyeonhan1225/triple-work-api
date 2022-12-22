@@ -3,6 +3,7 @@ package com.interpark.tripleworkapi.application
 import com.interpark.tripleworkapi.domain.city.CityRepository
 import com.interpark.tripleworkapi.domain.common.CommonState
 import com.interpark.tripleworkapi.domain.param.CityParam
+import com.interpark.tripleworkapi.domain.trip.TripRepository
 import io.mockk.every
 import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat
@@ -10,7 +11,8 @@ import org.junit.jupiter.api.Test
 
 class CityApplicationTest {
     private val cityRepository = mockk<CityRepository>()
-    private val cityApplication = CityApplication(repository = cityRepository)
+    private val tripRepository = mockk<TripRepository>()
+    private val cityApplication = CityApplication(repository = cityRepository, tripRepository = tripRepository)
 
     @Test
     fun `city create 성공 테스트`() {
