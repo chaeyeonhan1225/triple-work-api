@@ -8,9 +8,9 @@ import javax.persistence.*
 @Entity
 @Where(clause = "status > 0")
 class City(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
+    @EmbeddedId
+    @AttributeOverride(name = "value", column = Column(name = "id", nullable = false))
+    val id: CityId,
 
     param: CityParam
 ) {

@@ -1,27 +1,36 @@
 package com.interpark.tripleworkapi.application
 
 import com.interpark.tripleworkapi.domain.city.City
+import com.interpark.tripleworkapi.domain.city.CityId
 import com.interpark.tripleworkapi.domain.city.CityRepository
 import com.interpark.tripleworkapi.domain.param.CityParam
+import com.interpark.tripleworkapi.domain.service.SequenceGenerator
 import com.interpark.tripleworkapi.domain.trip.TripFilter
 import com.interpark.tripleworkapi.domain.trip.TripRepository
 import com.interpark.tripleworkapi.domain.trip.TripSpecification
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.stereotype.Repository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
+@Transactional
 class CityApplication(
+    private val sequenceGenerator: SequenceGenerator,
     private val repository: CityRepository,
     private val tripRepository: TripRepository
 ) {
     fun create(param: CityParam): City {
-        val city = City(param = param)
+        val cityId = CityId(sequenceGenerator.generate(City::class.java.simpleName))
+
+        val city = City(id = cityId, param = param)
         return repository.save(city)
     }
 
-    fun update(id: String, param: CityParam): City {
-        val city = repository.findById(id.toLong()).orElseThrow {
+    fun update(id: Long, param: CityParam): City {
+        val cityId = CityId(id)
+
+        val city = repository.findById(cityId).orElseThrow {
             NotFoundException()
         }
 

@@ -20,7 +20,7 @@ class CityController(
     private val service: CityApplication
 ) {
     @GetMapping("/{id}")
-    fun findById(@PathVariable id: String): City {
+    fun findById(@PathVariable id: Long): City {
         return provider.findById(id)
     }
 
@@ -35,7 +35,7 @@ class CityController(
     }
 
     @PutMapping("/{id}")
-    fun update(@PathVariable id: String, @RequestBody param: CityParam): City {
+    fun update(@PathVariable id: Long, @RequestBody param: CityParam): City {
         return service.update(id, param)
     }
 
