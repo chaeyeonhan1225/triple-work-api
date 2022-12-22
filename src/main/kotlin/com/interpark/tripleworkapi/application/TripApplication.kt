@@ -21,8 +21,10 @@ class TripApplication(
 ) {
     fun create(param: TripParam): Trip {
         val tripId = TripId(sequenceGenerator.generate(Trip::class.java.simpleName))
-        // TODO: 존재하지 않는 city면 Exception
-        verifyCities(param.cityIds.map { it.toLong() })
+
+        if (param.cityIds.isNotEmpty()) {
+            verifyCities(param.cityIds)
+        }
 
         // TODO: 존재하지 않는 user면 Exception
         val trip = Trip(id = tripId, param = param)
@@ -30,7 +32,7 @@ class TripApplication(
     }
 
     fun update(id: Long, param: TripParam): Trip {
-        verifyCities(param.cityIds.map { it.toLong() })
+        verifyCities(param.cityIds)
 
         val tripId = TripId(id)
         val trip = repository.findById(tripId).orElseThrow {

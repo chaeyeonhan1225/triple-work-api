@@ -40,7 +40,7 @@ class CityApplication(
 
     fun delete(id: Long): Boolean {
         // 1. 도시를 포함하는 여행이 있는지 검색
-        val tripSpecification = TripSpecification(filter = TripFilter(cityId =  1)).build()
+        val tripSpecification = TripSpecification(filter = TripFilter(cityId =  CityId(id))).build()
 
         val trips = tripRepository.findAll(tripSpecification)
         println("trips = $trips")

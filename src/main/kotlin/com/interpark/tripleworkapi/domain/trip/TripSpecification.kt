@@ -1,13 +1,14 @@
 package com.interpark.tripleworkapi.domain.trip
 
+import com.interpark.tripleworkapi.domain.city.CityId
 import com.interpark.tripleworkapi.domain.common.CommonState
 import org.springframework.data.jpa.domain.Specification
 
 class TripSpecification(
     private val filter: TripFilter
 ) {
-     fun byCityId(cityId: Long) = Specification<Trip> { root, query, criteriaBuilder ->
-         root.join<Trip, TripCity>("citiesToTrip").get<TripCity>("cityId").`in`(cityId)
+     fun byCityId(cityId: CityId) = Specification<Trip> { root, _, _ ->
+         root.join<Trip, TripCity>("citiesToTrip").get<CityId>("cityId").`in`(cityId)
      }
     fun build(): Specification<Trip> {
         var spec = Specification<Trip> { root, query, criteriaBuilder ->
@@ -26,7 +27,7 @@ class TripSpecification(
 }
 
 data class TripFilter (
-    val cityId: Long
+    val cityId: CityId
 )
 
 

@@ -1,6 +1,7 @@
 package com.interpark.tripleworkapi.domain.trip
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.interpark.tripleworkapi.domain.city.CityId
 import com.interpark.tripleworkapi.domain.common.CommonState
 import org.hibernate.annotations.Where
 import java.io.Serializable
@@ -16,8 +17,9 @@ class TripCity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-    @Column(nullable = false)
-    val cityId: Long = 0,
+    @Embedded
+    @AttributeOverride(name = "value", column = Column(name = "cityId", nullable = false))
+    val cityId: CityId,
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)

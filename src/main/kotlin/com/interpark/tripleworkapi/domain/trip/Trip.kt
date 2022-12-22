@@ -1,6 +1,7 @@
 package com.interpark.tripleworkapi.domain.trip
 
 
+import com.interpark.tripleworkapi.domain.city.CityId
 import com.interpark.tripleworkapi.domain.common.CommonState
 import com.interpark.tripleworkapi.domain.param.TripParam
 import org.hibernate.annotations.Where
@@ -37,7 +38,7 @@ class Trip(
         private set
 
     private fun createTripCity(cityId: Long, indexNo: Int): TripCity = TripCity(
-        cityId = cityId,
+        cityId = CityId(cityId),
         trip = this,
         indexNo = indexNo
     )

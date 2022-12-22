@@ -3,6 +3,8 @@ package com.interpark.tripleworkapi.application
 import com.interpark.tripleworkapi.domain.city.City
 import com.interpark.tripleworkapi.domain.city.CityId
 import com.interpark.tripleworkapi.domain.city.CityRepository
+import com.interpark.tripleworkapi.domain.event.CityViewed
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -10,11 +12,13 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional(readOnly = true)
 class CityProvider(
-    private val repository: CityRepository
+    private val repository: CityRepository,
+    private val eventPublisher: ApplicationEventPublisher
 ) {
     // TODO: 조회 이벤트 추가
     fun findById(id: Long): City {
         val cityId = CityId(id)
+        eventPublisher.publishEvent(CityViewed(message = "이벤트 발생~"))
         return repository.findById(cityId).orElseThrow {
             NotFoundException()
         }
