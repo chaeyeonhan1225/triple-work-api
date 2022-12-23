@@ -40,7 +40,7 @@ class CityController(
     }
 
     @DeleteMapping("/{id}")
-    fun delete() {
-        service.delete(id = 1)
+    fun delete(@PathVariable id: Long) {
+        service.delete(id)
     }
 }

@@ -31,12 +31,12 @@ class TripController(
     }
 
     @PutMapping("/{id}")
-    fun update(@PathVariable id: String, @RequestBody param: TripParam): Trip {
-        return service.update(id = id.toLong(), param = param)
+    fun update(@PathVariable id: Long, @RequestBody param: TripParam): Trip {
+        return service.update(id = id, param = param)
     }
 
-    @DeleteMapping
-    fun delete() {
-
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: Long): Boolean {
+        return service.delete(id)
     }
 }

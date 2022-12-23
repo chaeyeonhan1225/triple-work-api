@@ -32,8 +32,8 @@ class Trip(
         private set
 
     @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST, CascadeType.MERGE])
-    var citiesToTrip: List<TripCity> = param.cityIds.mapIndexed {
-        index, it -> createTripCity(cityId = it, indexNo = index)
+    var citiesToTrip: List<TripCity> = param.cityIds.mapIndexed { index, it ->
+        createTripCity(cityId = it, indexNo = index)
     }
         private set
 
@@ -47,11 +47,18 @@ class Trip(
         title = param.title
         plan = Plan(startedAt = param.plan.startedAt, endedAt = param.plan.endedAt)
         // cityIds = param.cityIds.map { it.toLong() }.toSet()
+//        citiesToTrip.forEach {
+//            tripCity -> param.cityIds.forEach {
+//                if (tripCity.cityId.value != it) {
+//
+//                }
+//        }
+//     }
     }
 
     fun delete() {
         status = CommonState.DELETED
-        citiesToTrip.forEach { it.delete() }
+        // citiesToTrip.forEach { it.delete() }
     }
 
 }

@@ -1,10 +1,7 @@
 package com.interpark.tripleworkapi.domain.viewlog
 
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import com.interpark.tripleworkapi.domain.city.CityId
+import javax.persistence.*
 
 @Entity
 class CityViewLog(
@@ -12,11 +9,12 @@ class CityViewLog(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-    @Column
+    @Column(nullable = false)
     val userId: Long = 0,
 
-    @Column
-    val cityId: Long = 0
+    @Embedded
+    @AttributeOverride(name = "value", column = Column(name = "cityId", nullable = false))
+    val cityId: CityId
 ) {
 
 
