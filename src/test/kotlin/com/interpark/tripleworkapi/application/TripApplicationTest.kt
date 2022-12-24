@@ -15,6 +15,7 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
+import java.time.LocalDate
 import java.util.Date
 
 class TripApplicationTest {
@@ -51,7 +52,7 @@ class TripApplicationTest {
         val testTripParam = TripParam(
             title = "테스트 여행",
             cityId = 1,
-            plan = PlanParam(startedAt = Date(), endedAt = Date())
+            plan = PlanParam(startedAt = LocalDate.now(), endedAt = LocalDate.now())
         )
 
         val newTrip = tripApplication.create(param = testTripParam)
@@ -71,7 +72,7 @@ class TripApplicationTest {
         val testTripParam = TripParam(
             title = "테스트 여행",
             cityId = 1,
-            plan = PlanParam(startedAt = Date(), endedAt = Date())
+            plan = PlanParam(startedAt = LocalDate.now(), endedAt = LocalDate.now())
         )
 
         assertThrows<RuntimeException> { tripApplication.create(param = testTripParam) }
