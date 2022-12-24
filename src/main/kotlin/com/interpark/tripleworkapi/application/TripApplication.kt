@@ -22,18 +22,19 @@ class TripApplication(
     fun create(param: TripParam): Trip {
         val tripId = TripId(sequenceGenerator.generate(Trip::class.java.simpleName))
 
-        if (param.cityIds.isNotEmpty()) {
-            verifyCities(param.cityIds)
+        if (!verifyCities(param.cityId)) {
+            throw NotFoundException()
         }
 
         // TODO: 존재하지 않는 user면 Exception
-        val trip = Trip(id = tripId, param = param)
+        val trip = Trip(id = tripId, param = param, cityId = CityId(param.cityId))
         return repository.save(trip)
     }
 
     fun update(id: Long, param: TripParam): Trip {
-        verifyCities(param.cityIds)
-
+        if (!verifyCities(param.cityId)) {
+            throw NotFoundException()
+        }
         val tripId = TripId(id)
         val trip = repository.findById(tripId).orElseThrow {
             NotFoundException()
@@ -43,13 +44,7 @@ class TripApplication(
         return repository.save(trip)
     }
 
-    fun verifyCities(cityIds: List<Long>) {
-        val ids = cityIds.map { CityId(it) }
-        val isExistCities = cityRepository.findAllById(ids).isNotEmpty()
-        if (!isExistCities) {
-            throw RuntimeException("존재하지 않는 도시입니다.")
-        }
-    }
+    fun verifyCities(cityId: Long) = cityRepository.existsById(CityId(cityId))
 
     fun delete(id: Long): Boolean {
         val tripId = TripId(id)

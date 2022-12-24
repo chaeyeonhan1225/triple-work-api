@@ -3,6 +3,7 @@ package com.interpark.tripleworkapi.domain.trip
 
 import com.interpark.tripleworkapi.domain.city.CityId
 import com.interpark.tripleworkapi.domain.common.CommonState
+import com.interpark.tripleworkapi.domain.common.EntityBase
 import com.interpark.tripleworkapi.domain.param.TripParam
 import org.hibernate.annotations.Where
 import javax.persistence.*
@@ -17,8 +18,12 @@ class Trip(
     @Column
     val userId: Long = 0,
 
+    @Embedded
+    @AttributeOverride(name = "value", column = Column(name = "cityId", nullable = false))
+    val cityId: CityId,
+
     param: TripParam
-) {
+): EntityBase() {
     @Column
     var title: String = param.title
         private set
@@ -31,17 +36,17 @@ class Trip(
     var status: CommonState = CommonState.ACTIVE
         private set
 
-    @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST, CascadeType.MERGE])
-    var citiesToTrip: List<TripCity> = param.cityIds.mapIndexed { index, it ->
-        createTripCity(cityId = it, indexNo = index)
-    }
-        private set
-
-    private fun createTripCity(cityId: Long, indexNo: Int): TripCity = TripCity(
-        cityId = CityId(cityId),
-        trip = this,
-        indexNo = indexNo
-    )
+//    @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST, CascadeType.MERGE])
+//    var citiesToTrip: List<TripCity> = param.cityIds.mapIndexed { index, it ->
+//        createTripCity(cityId = it, indexNo = index)
+//    }
+//        private set
+//
+//    private fun createTripCity(cityId: Long, indexNo: Int): TripCity = TripCity(
+//        cityId = CityId(cityId),
+//        trip = this,
+//        indexNo = indexNo
+//    )
 
     fun update(param: TripParam) {
         title = param.title

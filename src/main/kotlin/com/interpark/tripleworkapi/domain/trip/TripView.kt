@@ -3,7 +3,7 @@ package com.interpark.tripleworkapi.domain.trip
 import com.interpark.tripleworkapi.domain.city.City
 
 data class TripView(
-    val cities: List<City>,
+    val city: City,
     private val trip: Trip,
 ) {
     val id = trip.id

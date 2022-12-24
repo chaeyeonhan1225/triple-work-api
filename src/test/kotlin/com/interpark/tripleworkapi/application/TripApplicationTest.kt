@@ -50,7 +50,7 @@ class TripApplicationTest {
 
         val testTripParam = TripParam(
             title = "테스트 여행",
-            cityIds = listOf(1),
+            cityId = 1,
             plan = PlanParam(startedAt = Date(), endedAt = Date())
         )
 
@@ -70,7 +70,7 @@ class TripApplicationTest {
 
         val testTripParam = TripParam(
             title = "테스트 여행",
-            cityIds = listOf(1),
+            cityId = 1,
             plan = PlanParam(startedAt = Date(), endedAt = Date())
         )
 

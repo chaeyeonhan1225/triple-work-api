@@ -3,6 +3,7 @@ package com.interpark.tripleworkapi.application
 import com.interpark.tripleworkapi.domain.city.City
 import com.interpark.tripleworkapi.domain.city.CityId
 import com.interpark.tripleworkapi.domain.city.CityRepository
+import com.interpark.tripleworkapi.domain.city.CityViewDao
 import com.interpark.tripleworkapi.domain.event.CityViewed
 import com.interpark.tripleworkapi.domain.event.EventPublisher
 import org.springframework.context.ApplicationEventPublisher
@@ -14,7 +15,8 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional(readOnly = true)
 class CityProvider(
     private val repository: CityRepository,
-    private val eventPublisher: EventPublisher
+    private val eventPublisher: EventPublisher,
+    // private val cityViewDao: CityViewDao
 ) {
     // TODO: 조회 이벤트 추가
     fun findById(id: Long): City {
@@ -28,4 +30,8 @@ class CityProvider(
 
         return city
     }
+
+//    fun findAllByUser(): List<City> {
+//        return cityViewDao.findAllCitiesByUser()
+//    }
 }

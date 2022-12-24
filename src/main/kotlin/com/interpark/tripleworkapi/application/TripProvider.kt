@@ -16,10 +16,10 @@ class TripProvider(
 ) {
     fun findById(id: Long): TripView {
         val trip = repository.findById(TripId(id)).orElseThrow { NotFoundException() }
-        val cityIds = trip.citiesToTrip.map { it.cityId }
-        val cities = cityRepository.findAllById(cityIds)
+        // val cityIds = trip.citiesToTrip.map { it.cityId }
+        val city = cityRepository.findById(trip.cityId).orElseThrow { NotFoundException() }
 
-        return TripView(trip = trip, cities = cities)
+        return TripView(trip = trip, city = city)
     }
 
 }

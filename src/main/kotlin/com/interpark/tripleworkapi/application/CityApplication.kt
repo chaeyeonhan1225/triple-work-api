@@ -41,17 +41,18 @@ class CityApplication(
     fun delete(id: Long): Boolean {
         // 1. 도시를 포함하는 여행이 있는지 검색
         // TODO: 도메인 서비스로 분리
-        val tripSpecification = TripSpecification(filter = TripFilter(cityId =  CityId(id))).build()
-        val trips = tripRepository.findAll(tripSpecification)
-
-        println("trips = $trips")
-        if (trips.isNotEmpty()) {
-            return false
-        } else {
-            val city = repository.findById(CityId(id)).orElseThrow { NotFoundException() }
-            city.delete()
-            repository.save(city)
-            return true
-        }
+//        val tripSpecification = TripSpecification(filter = TripFilter(cityId =  CityId(id))).build()
+//        val trips = tripRepository.findAll(tripSpecification)
+//
+//        println("trips = $trips")
+//        if (trips.isNotEmpty()) {
+//            return false
+//        } else {
+//            val city = repository.findById(CityId(id)).orElseThrow { NotFoundException() }
+//            city.delete()
+//            repository.save(city)
+//            return true
+//        }
+        return true
     }
 }

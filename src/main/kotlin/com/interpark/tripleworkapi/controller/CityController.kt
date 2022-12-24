@@ -1,22 +1,17 @@
 package com.interpark.tripleworkapi.controller
 
 import com.interpark.tripleworkapi.application.CityApplication
+import com.interpark.tripleworkapi.application.CityListByUserProvider
 import com.interpark.tripleworkapi.application.CityProvider
 import com.interpark.tripleworkapi.domain.city.City
 import com.interpark.tripleworkapi.domain.param.CityParam
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("v1/cities")
 class CityController(
     private val provider: CityProvider,
+    private val cityListByUserProvider: CityListByUserProvider,
     private val service: CityApplication
 ) {
     @GetMapping("/{id}")
@@ -24,10 +19,10 @@ class CityController(
         return provider.findById(id)
     }
 
-//    @GetMapping
-//    fun findByUser() {
-//
-//    }
+    @GetMapping
+    fun findByUser(@RequestParam userId: Long?): List<City> {
+        return cityListByUserProvider.findAllByUser(userId = 1)
+    }
 
     @PostMapping
     fun create(@RequestBody param: CityParam): City {

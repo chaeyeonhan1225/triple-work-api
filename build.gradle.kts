@@ -6,6 +6,8 @@ plugins {
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
     kotlin("plugin.jpa") version "1.6.21"
+    kotlin("kapt")  version "1.6.10" // kapt 등록
+//    kotlin("kapt") version "1.3.61"
 }
 
 group = "com.interpark"
@@ -30,7 +32,6 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.hibernate:hibernate-jpamodelgen:6.1.6.Final")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("com.h2database:h2")
@@ -39,6 +40,9 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("com.ninja-squad:springmockk:3.1.1")
+    // querydsl
+    api("com.querydsl:querydsl-jpa:")
+    kapt(group = "com.querydsl", name = "querydsl-apt", classifier = "jpa")
 }
 
 tasks.withType<KotlinCompile> {

@@ -1,6 +1,7 @@
 package com.interpark.tripleworkapi.domain.city
 
 import com.interpark.tripleworkapi.domain.common.CommonState
+import com.interpark.tripleworkapi.domain.common.EntityBase
 import com.interpark.tripleworkapi.domain.param.CityParam
 import org.hibernate.annotations.Where
 import javax.persistence.*
@@ -13,7 +14,7 @@ class City(
     val id: CityId,
 
     param: CityParam
-) {
+): EntityBase() {
     @Column(nullable = false, length = 128)
     var name: String = param.name
 
