@@ -1,6 +1,7 @@
 package com.interpark.tripleworkapi.domain.viewlog
 
 import com.interpark.tripleworkapi.domain.city.CityId
+import com.interpark.tripleworkapi.domain.common.EntityBase
 import javax.persistence.*
 
 @Entity
@@ -15,7 +16,6 @@ class CityViewLog(
     @Embedded
     @AttributeOverride(name = "value", column = Column(name = "cityId", nullable = false))
     val cityId: CityId
-) {
-
+): EntityBase() {
 
 }

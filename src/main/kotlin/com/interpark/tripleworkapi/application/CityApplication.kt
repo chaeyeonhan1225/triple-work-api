@@ -3,13 +3,11 @@ package com.interpark.tripleworkapi.application
 import com.interpark.tripleworkapi.domain.city.City
 import com.interpark.tripleworkapi.domain.city.CityId
 import com.interpark.tripleworkapi.domain.city.CityRepository
+import com.interpark.tripleworkapi.domain.exception.CityUnableDeleteException
+import com.interpark.tripleworkapi.domain.exception.NotFoundException
 import com.interpark.tripleworkapi.domain.param.CityParam
 import com.interpark.tripleworkapi.domain.service.SequenceGenerator
-import com.interpark.tripleworkapi.domain.trip.TripFilter
 import com.interpark.tripleworkapi.domain.trip.TripRepository
-import com.interpark.tripleworkapi.domain.trip.TripSpecification
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
-import org.springframework.stereotype.Repository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -31,7 +29,7 @@ class CityApplication(
         val cityId = CityId(id)
 
         val city = repository.findById(cityId).orElseThrow {
-            NotFoundException()
+            NotFoundException(message = "존재하지 않는 도시입니다.")
         }
 
         city.update(param)
@@ -39,20 +37,18 @@ class CityApplication(
     }
 
     fun delete(id: Long): Boolean {
-        // 1. 도시를 포함하는 여행이 있는지 검색
         // TODO: 도메인 서비스로 분리
-//        val tripSpecification = TripSpecification(filter = TripFilter(cityId =  CityId(id))).build()
-//        val trips = tripRepository.findAll(tripSpecification)
-//
-//        println("trips = $trips")
-//        if (trips.isNotEmpty()) {
-//            return false
-//        } else {
-//            val city = repository.findById(CityId(id)).orElseThrow { NotFoundException() }
-//            city.delete()
-//            repository.save(city)
-//            return true
-//        }
+        val cityId = CityId(id)
+        val trips = tripRepository.findAllByCityId(cityId)
+        if (trips.isNotEmpty()) {
+            throw CityUnableDeleteException(message = "해당 도시는 삭제할 수 없습니다.")
+        }
+
+        val city = repository.findById(cityId).orElseThrow {
+            NotFoundException(message = "존재하지 않는 도시입니다.")
+        }
+        city.delete()
+        repository.save(city)
         return true
     }
 }

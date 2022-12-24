@@ -6,8 +6,8 @@ import com.interpark.tripleworkapi.domain.city.CityRepository
 import com.interpark.tripleworkapi.domain.city.CityViewDao
 import com.interpark.tripleworkapi.domain.event.CityViewed
 import com.interpark.tripleworkapi.domain.event.EventPublisher
+import com.interpark.tripleworkapi.domain.exception.NotFoundException
 import org.springframework.context.ApplicationEventPublisher
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -21,13 +21,12 @@ class CityProvider(
     // TODO: 조회 이벤트 추가
     fun findById(id: Long): City {
         val cityId = CityId(id)
-        eventPublisher.publish(CityViewed(userId = 0, cityId = cityId))
 
         val city = repository.findById(cityId).orElseThrow {
-            NotFoundException()
+            NotFoundException(message = "존재하지 않는 도시입니다.")
         }
 
-
+        eventPublisher.publish(CityViewed(userId = 0, cityId = cityId))
         return city
     }
 

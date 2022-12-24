@@ -1,5 +1,6 @@
 package com.interpark.tripleworkapi.domain.trip
 
+import com.interpark.tripleworkapi.domain.city.City
 import com.interpark.tripleworkapi.domain.city.CityId
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
@@ -17,5 +18,5 @@ interface TripRepository : JpaRepository<Trip, TripId>, JpaSpecificationExecutor
     )
     fun findImpendingTrips(pageable: Pageable): List<Trip>
 
-    fun findAllByCityId(cityId: CityId)
+    fun findAllByCityId(cityId: CityId): List<Trip>
 }

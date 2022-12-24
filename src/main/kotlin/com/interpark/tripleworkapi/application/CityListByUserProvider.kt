@@ -17,30 +17,30 @@ class CityListByUserProvider(
     fun findAllByUser(userId: Long): List<City> {
         val sort = CitySort(
             userId = userId,
-            types = listOf(
-                CitySortType.ONGOING_TRIP,
-                CitySortType.IMPENDING_TRIP,
-                CitySortType.RECENTLY_CREATED,
-                CitySortType.RECENTLY_VIEWD,
-                CitySortType.RANDOM
+            orderTypes = listOf(
+                CityOrderType.ONGOING_TRIP,
+                CityOrderType.IMPENDING_TRIP,
+                CityOrderType.RECENTLY_CREATED,
+                CityOrderType.RECENTLY_VIEWD,
+                CityOrderType.RANDOM
             ),
             limit = 10
         )
 
         val list = mutableListOf<City>()
-        sort.types.forEach {
+        sort.orderTypes.map {
 
         }
         return listOf()
     }
 
-    fun findCitiesBySortType(type: CitySortType) =
+    fun findCitiesBySortType(type: CityOrderType) =
         when (type) {
-            CitySortType.ONGOING_TRIP -> findOngoingTripCities()
-            CitySortType.IMPENDING_TRIP -> findImpendingTripCities()
-            CitySortType.RECENTLY_CREATED -> findRecentCreatedCities()
-            CitySortType.RECENTLY_VIEWD -> findRecentViewedCities()
-            CitySortType.RANDOM -> findRandomCities()
+            CityOrderType.ONGOING_TRIP -> findOngoingTripCities()
+            CityOrderType.IMPENDING_TRIP -> findImpendingTripCities()
+            CityOrderType.RECENTLY_CREATED -> findRecentCreatedCities()
+            CityOrderType.RECENTLY_VIEWD -> findRecentViewedCities()
+            CityOrderType.RANDOM -> findRandomCities()
             else -> listOf()
         }
 
@@ -73,11 +73,11 @@ class CityListByUserProvider(
 
 data class CitySort(
     val userId: Long,
-    val types: List<CitySortType>,
+    val orderTypes: List<CityOrderType>,
     val limit: Int
 )
 
-enum class CitySortType {
+enum class CityOrderType {
     ONGOING_TRIP,
     IMPENDING_TRIP,
     RECENTLY_CREATED,
