@@ -36,18 +36,6 @@ class Trip(
     var status: CommonState = CommonState.ACTIVE
         private set
 
-//    @OneToMany(mappedBy = "trip", fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST, CascadeType.MERGE])
-//    var citiesToTrip: List<TripCity> = param.cityIds.mapIndexed { index, it ->
-//        createTripCity(cityId = it, indexNo = index)
-//    }
-//        private set
-//
-//    private fun createTripCity(cityId: Long, indexNo: Int): TripCity = TripCity(
-//        cityId = CityId(cityId),
-//        trip = this,
-//        indexNo = indexNo
-//    )
-
     fun update(param: TripParam) {
         title = param.title
         plan = Plan(startedAt = param.plan.startedAt, endedAt = param.plan.endedAt)
