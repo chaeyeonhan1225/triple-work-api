@@ -14,7 +14,7 @@ interface CityRepository: JpaRepository<City, CityId> {
     @Query("select c from City as c where c.createdAt >= :at and c.id not in (:excludedCityIds) and c.status > 0 order by c.createdAt desc")
     fun findAllByCreatedAtAfter(@Param("at") at: LocalDateTime, @Param("excludedCityIds") excludedCityIds: List<CityId>, pageable: Pageable): List<City>
 
-    @Query(value = "select c from City as c where c.id not in (:excludedCityIds)  order by random()")
+    @Query(value = "select c from City as c where c.id not in (:excludedCityIds)  order by rand()")
     fun findAllByRandom(@Param("excludedCityIds") excludedCityIds: List<CityId>, pageable: Pageable): List<City>
 
     @Query(
@@ -24,13 +24,13 @@ interface CityRepository: JpaRepository<City, CityId> {
     )
     fun findCitiesOfOngoingTrip(@Param("userId") userId: UserId): List<City>
 
-    @Query(
-        "select distinct c, t.plan.startedAt from City as c join Trip as t ON c.id = t.cityId where" +
-                " t.userId = :userId and t.status > 0 and c.status > 0 and" +
-                " t.plan.startedAt > current_date and t.plan.startedAt >= :at and" +
-                " c.id not in :excludedCityIds order by t.plan.startedAt"
-    )
-    fun findCitiesOfImpendingTrip(): List<City>
+//    @Query(
+//        "select distinct c, t.plan.startedAt from City as c join Trip as t ON c.id = t.cityId where" +
+//                " t.userId = :userId and t.status > 0 and c.status > 0 and" +
+//                " t.plan.startedAt > current_date and t.plan.startedAt >= :at and" +
+//                " c.id not in :excludedCityIds order by t.plan.startedAt"
+//    )
+//    fun findCitiesOfImpendingTrip(): List<City>
 
     @Query(
         "select c from City as c where c.id " +

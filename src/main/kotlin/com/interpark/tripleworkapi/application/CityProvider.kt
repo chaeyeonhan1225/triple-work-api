@@ -16,18 +16,16 @@ class CityProvider(
     private val repository: CityRepository,
     private val eventPublisher: EventPublisher,
 ) {
-    fun findById(id: Long): City {
+    fun findById(id: Long, userId: Long?): City {
         val cityId = CityId(id)
-
+        val viewerId = UserId(userId ?: 0)
         val city = repository.findById(cityId).orElseThrow {
             NotFoundException(message = "존재하지 않는 도시입니다.")
         }
 
         eventPublisher.publish(
             CityViewed(
-                userId = UserId(
-                    0
-                ), cityId = cityId
+                userId = viewerId, cityId = cityId
             )
         )
         return city

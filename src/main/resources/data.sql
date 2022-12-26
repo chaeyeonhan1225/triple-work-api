@@ -14,8 +14,6 @@ VALUES
     (4, 'Tokyo', 'KR', 1, 0, '2022-01-01T00:00:00', CURRENT_DATE),
     (5, 'London', 'KR', 1, 0, '2022-01-01T00:00:00', CURRENT_DATE);
 
-
--- TODO: 개선 필요
 INSERT INTO "User" (id, email, nickname, status, version, createdAt, updatedAt)
 VALUES
     (1, 'test1@gmail.com', '테스트 계정1', 1, 0, CURRENT_DATE, CURRENT_DATE),

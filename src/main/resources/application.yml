@@ -27,10 +27,6 @@ springdoc:
     - /v1//cities/**
     - /v1//trips/**
     - /v1//users/**
-#  sql:
-#    init:
-#      data-locations: classpath:data.sql
-#      mode: always
 server:
   port: 8080
 ---
@@ -43,7 +39,7 @@ spring:
   jpa:
     generate-ddl: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
@@ -56,6 +52,15 @@ spring:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:~/test
     username: sa
+  sql:
+    init:
+      data-locations: classpath:data.sql
+      mode: always
+springdoc:
+  paths-to-match:
+    - /v1//cities/**
+    - /v1//trips/**
+    - /v1//users/**
 server:
   port: 3000
 ---
@@ -72,4 +77,15 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
-    show-sql: true
+    show-sql: false
+    defer-datasource-initialization: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/Triple?serverTimezone=UTC&useCursors=false&sendStringParametersAsUnicode=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false
+    username: root
+    password:
+springdoc:
+  paths-to-match:
+    - /v1//cities/**
+    - /v1//trips/**
+    - /v1//users/**

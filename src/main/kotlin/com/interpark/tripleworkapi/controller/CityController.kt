@@ -15,8 +15,8 @@ class CityController(
     private val service: CityApplication
 ) {
     @GetMapping("/{id}")
-    fun findById(@PathVariable id: Long): City {
-        return provider.findById(id)
+    fun findById(@PathVariable id: Long, @RequestParam userId: Long?): City {
+        return provider.findById(id, userId)
     }
 
     @GetMapping
