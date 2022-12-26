@@ -3,30 +3,34 @@ package com.interpark.tripleworkapi.application
 import com.interpark.tripleworkapi.domain.city.City
 import com.interpark.tripleworkapi.domain.city.CityId
 import com.interpark.tripleworkapi.domain.city.CityRepository
+import com.interpark.tripleworkapi.domain.exception.NotFoundException
+import com.interpark.tripleworkapi.domain.exception.InvalidPlanException
 import com.interpark.tripleworkapi.domain.trip.TripRepository
 import com.interpark.tripleworkapi.domain.param.CityParam
 import com.interpark.tripleworkapi.domain.param.PlanParam
 import com.interpark.tripleworkapi.domain.param.TripParam
 import com.interpark.tripleworkapi.domain.service.SequenceGenerator
 import com.interpark.tripleworkapi.domain.trip.Trip
+import com.interpark.tripleworkapi.domain.user.UserId
+import com.interpark.tripleworkapi.domain.user.UserRepository
 import io.mockk.every
 import io.mockk.mockk
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import java.time.LocalDate
-import java.util.Date
 
 class TripApplicationTest {
     private val sequenceGenerator = mockk<SequenceGenerator>()
     private val tripRepository = mockk<TripRepository>()
     private val cityRepository = mockk<CityRepository>()
+    private val userRepository = mockk<UserRepository>()
 
     private val tripApplication = TripApplication(
         sequenceGenerator = sequenceGenerator,
         repository = tripRepository,
-        cityRepository = cityRepository
+        cityRepository = cityRepository,
+        userRepository = userRepository
     )
 
 
@@ -46,13 +50,19 @@ class TripApplicationTest {
         } returnsArgument (0)
 
         every {
-            cityRepository.findAllById(listOf(CityId(1)))
-        } returns listOf(mockCity)
+            cityRepository.existsById(CityId(1))
+        } returns true
+
+        every {
+            userRepository.existsById(UserId(1))
+        } returns true
+
 
         val testTripParam = TripParam(
             title = "테스트 여행",
             cityId = 1,
-            plan = PlanParam(startedAt = LocalDate.now(), endedAt = LocalDate.now())
+            plan = PlanParam(startedAt = LocalDate.now(), endedAt = LocalDate.now()),
+            userId = 1
         )
 
         val newTrip = tripApplication.create(param = testTripParam)
@@ -62,19 +72,84 @@ class TripApplicationTest {
     @Test
     fun `trip create error 테스트 - 해당하는 도시가 없음`() {
         every {
+            sequenceGenerator.generate(Trip::class.java.simpleName)
+        } returns 1
+
+        every {
             tripRepository.save(any())
         } returnsArgument (0)
 
         every {
-            cityRepository.findAllById(listOf(CityId(1)))
-        } returns listOf()
+            cityRepository.existsById(CityId(1))
+        } returns false
+
+        every {
+            userRepository.existsById(UserId(1))
+        } returns true
 
         val testTripParam = TripParam(
             title = "테스트 여행",
             cityId = 1,
-            plan = PlanParam(startedAt = LocalDate.now(), endedAt = LocalDate.now())
+            plan = PlanParam(startedAt = LocalDate.now(), endedAt = LocalDate.now()),
+            userId = 1
         )
 
-        assertThrows<RuntimeException> { tripApplication.create(param = testTripParam) }
+        assertThrows<NotFoundException> { tripApplication.create(param = testTripParam) }
+    }
+
+    @Test
+    fun `trip create error 테스트 - 유저가 없음`() {
+        every {
+            sequenceGenerator.generate(Trip::class.java.simpleName)
+        } returns 1
+
+        every {
+            tripRepository.save(any())
+        } returnsArgument (0)
+
+        every {
+            cityRepository.existsById(CityId(1))
+        } returns true
+
+        every {
+            userRepository.existsById(UserId(1))
+        } returns false
+
+        val testTripParam = TripParam(
+            title = "테스트 여행",
+            cityId = 1,
+            plan = PlanParam(startedAt = LocalDate.now(), endedAt = LocalDate.now()),
+            userId = 1
+        )
+
+        assertThrows<NotFoundException> { tripApplication.create(param = testTripParam) }
+    }
+
+    @Test
+    fun `trip create error 테스트 - invalid plan`() {
+        every {
+            sequenceGenerator.generate(Trip::class.java.simpleName)
+        } returns 1
+
+        every {
+            tripRepository.save(any())
+        } returnsArgument (0)
+
+        every {
+            cityRepository.existsById(CityId(1))
+        } returns true
+
+        every {
+            userRepository.existsById(UserId(1))
+        } returns true
+
+        val testTripParam = TripParam(
+            title = "테스트 여행",
+            cityId = 1,
+            plan = PlanParam(startedAt = LocalDate.now(), endedAt = LocalDate.now().minusDays(3)),
+            userId = 1
+        )
+
+        assertThrows<InvalidPlanException> { tripApplication.create(param = testTripParam) }
     }
 }

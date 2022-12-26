@@ -5,6 +5,7 @@ import com.interpark.tripleworkapi.domain.city.CityId
 import com.interpark.tripleworkapi.domain.common.CommonState
 import com.interpark.tripleworkapi.domain.common.EntityBase
 import com.interpark.tripleworkapi.domain.param.TripParam
+import com.interpark.tripleworkapi.domain.user.UserId
 import org.hibernate.annotations.Where
 import javax.persistence.*
 
@@ -15,12 +16,13 @@ class Trip(
     @AttributeOverride(name = "value", column = Column(name = "id", nullable = false))
     val id: TripId,
 
-    @Column
-    val userId: Long = 0,
+    @Embedded
+    @AttributeOverride(name = "value", column = Column(name = "userId", nullable = false))
+    val userId: UserId,
 
     @Embedded
     @AttributeOverride(name = "value", column = Column(name = "cityId", nullable = false))
-    val cityId: CityId,
+    var cityId: CityId,
 
     param: TripParam
 ): EntityBase() {
@@ -39,19 +41,11 @@ class Trip(
     fun update(param: TripParam) {
         title = param.title
         plan = Plan(startedAt = param.plan.startedAt, endedAt = param.plan.endedAt)
-        // cityIds = param.cityIds.map { it.toLong() }.toSet()
-//        citiesToTrip.forEach {
-//            tripCity -> param.cityIds.forEach {
-//                if (tripCity.cityId.value != it) {
-//
-//                }
-//        }
-//     }
+        cityId = CityId(param.cityId)
     }
 
     fun delete() {
         status = CommonState.DELETED
-        // citiesToTrip.forEach { it.delete() }
     }
 
 }

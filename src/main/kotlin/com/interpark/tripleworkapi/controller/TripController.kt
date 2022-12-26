@@ -27,7 +27,6 @@ class TripController(
 
     @PostMapping
     fun create(@RequestBody param: TripParam): Trip {
-        println("parm = $param")
         return service.create(param)
     }
 
