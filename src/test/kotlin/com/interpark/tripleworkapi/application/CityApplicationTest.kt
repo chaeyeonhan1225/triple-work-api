@@ -5,6 +5,7 @@ import com.interpark.tripleworkapi.domain.city.CityId
 import com.interpark.tripleworkapi.domain.city.CityRepository
 import com.interpark.tripleworkapi.domain.common.CommonState
 import com.interpark.tripleworkapi.domain.param.CityParam
+import com.interpark.tripleworkapi.domain.service.CityDeleteService
 import com.interpark.tripleworkapi.domain.service.SequenceGenerator
 import com.interpark.tripleworkapi.domain.trip.TripRepository
 import io.mockk.every
@@ -15,11 +16,11 @@ import org.junit.jupiter.api.Test
 class CityApplicationTest {
     private val sequenceGenerator = mockk<SequenceGenerator>()
     private val cityRepository = mockk<CityRepository>()
-    private val tripRepository = mockk<TripRepository>()
+    private val cityDeleteService = mockk<CityDeleteService>()
     private val cityApplication = CityApplication(
         sequenceGenerator = sequenceGenerator,
         repository = cityRepository,
-        tripRepository = tripRepository
+        cityDeleteService = cityDeleteService
     )
 
     @Test

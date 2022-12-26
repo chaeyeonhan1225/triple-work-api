@@ -17,7 +17,7 @@ class CityListOfRecentlyCreatedLoader(
     override fun loadCityList(size: Int, excludedCityIds: List<CityId>, userId: UserId): List<City> {
         println(this::class.java.simpleName + excludedCityIds.map { it.value })
         return cityRepository.findAllByCreatedAtAfter(
-            LocalDateTime.now().minusWeeks(1),
+            LocalDateTime.now().minusDays(1),
             excludedCityIds,
             Pageable.ofSize(size)
         )

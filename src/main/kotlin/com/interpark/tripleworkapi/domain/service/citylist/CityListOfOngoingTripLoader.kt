@@ -3,8 +3,6 @@ package com.interpark.tripleworkapi.domain.service.citylist
 import com.interpark.tripleworkapi.domain.city.City
 import com.interpark.tripleworkapi.domain.city.CityId
 import com.interpark.tripleworkapi.domain.city.CityRepository
-import com.interpark.tripleworkapi.domain.trip.TripRepository
-import com.interpark.tripleworkapi.domain.user.User
 import com.interpark.tripleworkapi.domain.user.UserId
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component

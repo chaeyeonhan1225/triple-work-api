@@ -25,19 +25,20 @@ interface CityRepository: JpaRepository<City, CityId> {
     fun findCitiesOfOngoingTrip(@Param("userId") userId: UserId): List<City>
 
     @Query(
-        "select distinct (c), t.plan.startedAt from City as c join Trip as t ON c.id = t.cityId where" +
+        "select distinct c, t.plan.startedAt from City as c join Trip as t ON c.id = t.cityId where" +
                 " t.userId = :userId and t.status > 0 and c.status > 0 and" +
                 " t.plan.startedAt > current_date and t.plan.startedAt >= :at and" +
                 " c.id not in :excludedCityIds order by t.plan.startedAt"
     )
-    fun findCitiesOfImpendingTrip(@Param("userId") userId: UserId, @Param("excludedCityIds") excludedCityIds: List<CityId>, @Param("at") at: LocalDate, pageable: Pageable): List<City>
+    fun findCitiesOfImpendingTrip(): List<City>
 
     @Query(
-        "select distinct (c), vl.id from City as c join CityViewLog as vl ON c.id = vl.cityId where" +
-                " vl.userId = :userId and c.status > 0 and" +
-                " vl.createdAt >= :at and" +
-                " c.id not in :excludedCityIds order by vl.id"
+        "select c from City as c where c.id " +
+                "in ( select vl.cityId from CityViewLog as vl where " +
+                " vl.userId = :userId and vl.createdAt >= :at and vl.cityId not in :excludedCityIds order by vl.id desc)"
     )
-    fun findCitiesOfRecentlyViewed(@Param("userId") userId: UserId, @Param("excludedCityIds") excludedCityIds: List<CityId>, @Param("at") at: LocalDateTime, pageable: Pageable): List<City>
-
+    fun findCitiesOfRecentlyCreatedViewLog( @Param("userId") userId: UserId,
+                                            @Param("excludedCityIds") excludedCityIds: List<CityId>,
+                                            @Param("at") at: LocalDateTime,
+                                            pageable: Pageable): List<City>
 }
