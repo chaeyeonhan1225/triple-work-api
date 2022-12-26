@@ -1,4 +1,4 @@
-package com.interpark.tripleworkapi.acceptance
+package com.interpark.tripleworkapi.controller
 
 import com.interpark.tripleworkapi.application.TripApplication
 import com.interpark.tripleworkapi.application.TripProvider

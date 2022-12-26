@@ -16,7 +16,7 @@ class CityListOfRecentlyViewedLoader(
     private val cityRepository: CityRepository,
     private val cityViewLogRepository: CityViewLogRepository
 ) : CityListLoader {
-    override fun loadCityList(size: Int, excludedCityIds: List<CityId>, userId: UserId): List<City> {
+    override fun loadCityList(size: Int, excludedCityIds: List<CityId>, userId: UserId?): List<City> {
         println(this::class.java.simpleName + excludedCityIds.map { it.value })
 //        val cityIds = cityViewLogRepository.findCityViewLogRecentlyCreatedByUserId(
 //            userId = userId,
@@ -27,9 +27,13 @@ class CityListOfRecentlyViewedLoader(
 
 //        println("cityIds = " + cityIds.map { it.value })
 
-        return cityRepository.findCitiesOfRecentlyCreatedViewLog( userId = userId,
-            excludedCityIds = excludedCityIds,
-            at = LocalDateTime.now().minusWeeks(1),
-            pageable = Pageable.ofSize(size))
+        userId?.let {
+            return cityRepository.findCitiesOfRecentlyCreatedViewLog( userId = userId,
+                excludedCityIds = excludedCityIds,
+                at = LocalDateTime.now().minusWeeks(1),
+                pageable = Pageable.ofSize(size))
+        }
+
+        return listOf()
     }
 }

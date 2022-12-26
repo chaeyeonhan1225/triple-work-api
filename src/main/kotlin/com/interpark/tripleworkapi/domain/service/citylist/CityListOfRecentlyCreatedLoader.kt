@@ -14,7 +14,7 @@ import java.time.LocalDateTime
 class CityListOfRecentlyCreatedLoader(
     private val cityRepository: CityRepository
 ): CityListLoader {
-    override fun loadCityList(size: Int, excludedCityIds: List<CityId>, userId: UserId): List<City> {
+    override fun loadCityList(size: Int, excludedCityIds: List<CityId>, userId: UserId?): List<City> {
         println(this::class.java.simpleName + excludedCityIds.map { it.value })
         return cityRepository.findAllByCreatedAtAfter(
             LocalDateTime.now().minusDays(1),

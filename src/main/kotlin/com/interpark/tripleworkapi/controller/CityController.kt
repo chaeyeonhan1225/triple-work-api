@@ -1,4 +1,4 @@
-package com.interpark.tripleworkapi.acceptance
+package com.interpark.tripleworkapi.controller
 
 import com.interpark.tripleworkapi.application.CityApplication
 import com.interpark.tripleworkapi.application.CityListByUserProvider
@@ -20,7 +20,7 @@ class CityController(
     }
 
     @GetMapping
-    fun findByUser(@RequestParam userId: Long): List<City> {
+    fun findByUser(@RequestParam userId: Long?): List<City> {
         return cityListByUserProvider.findAllByUser(userId = userId)
     }
 

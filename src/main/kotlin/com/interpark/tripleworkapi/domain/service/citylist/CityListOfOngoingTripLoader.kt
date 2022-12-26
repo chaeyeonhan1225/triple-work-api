@@ -12,8 +12,11 @@ import org.springframework.stereotype.Component
 class CityListOfOngoingTripLoader(
     private val cityRepository: CityRepository
 ): CityListLoader {
-    override fun loadCityList(size: Int, excludedCityIds: List<CityId>, userId: UserId): List<City> {
+    override fun loadCityList(size: Int, excludedCityIds: List<CityId>, userId: UserId?): List<City> {
         println(this::class.java.simpleName + excludedCityIds.map { it.value })
-        return cityRepository.findCitiesOfOngoingTrip(userId = userId)
+        userId?.let {
+            return cityRepository.findCitiesOfOngoingTrip(userId = userId)
+        }
+        return listOf()
     }
 }

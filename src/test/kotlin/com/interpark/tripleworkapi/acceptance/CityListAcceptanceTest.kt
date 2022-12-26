@@ -103,4 +103,18 @@ class CityListAcceptanceTest(
                 MockMvcResultMatchers.jsonPath("\$[4].id").value(1)
             )
     }
+
+    @Test
+    @Sql("classpath:test/city-list-case5.sql")
+    fun `유저 ID가 없으면 최근에 생성된 도시(id = 7, 8), 랜덤으로 정렬된다`() {
+        mockMvc.perform(
+            MockMvcRequestBuilders.get("/v1/cities")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().isOk)
+            .andExpectAll(
+                MockMvcResultMatchers.jsonPath("\$[0].id").value(7),
+                MockMvcResultMatchers.jsonPath("\$[1].id").value(8),
+            )
+    }
 }

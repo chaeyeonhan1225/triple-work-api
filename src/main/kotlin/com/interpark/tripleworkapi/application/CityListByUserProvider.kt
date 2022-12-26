@@ -17,7 +17,7 @@ import kotlin.run as loop
 class CityListByUserProvider(
     private val loaders: List<CityListLoader>
 ) {
-    fun findAllByUser(userId: Long): List<City> {
+    fun findAllByUser(userId: Long?): List<City> {
         val maxSize = 10
         val list = mutableListOf<City>()
 
@@ -26,7 +26,7 @@ class CityListByUserProvider(
                 val excludedCityIds = list.map {
                     it.id
                 }
-                val result = it.loadCityList(maxSize, excludedCityIds, UserId(userId))
+                val result = it.loadCityList(maxSize, excludedCityIds, userId?.let { UserId(userId) })
                 println("result = " + result.map { it.id.value })
                 list.addAll(
                     result

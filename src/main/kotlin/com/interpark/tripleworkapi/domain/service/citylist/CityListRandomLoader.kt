@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component
 class CityListRandomLoader(
     private val cityRepository: CityRepository
 ): CityListLoader {
-    override fun loadCityList(size: Int, excludedCityIds: List<CityId>, userId: UserId): List<City> {
+    override fun loadCityList(size: Int, excludedCityIds: List<CityId>, userId: UserId?): List<City> {
         println(this::class.java.simpleName + excludedCityIds.map { it.value })
         return cityRepository.findAllByRandom(excludedCityIds, Pageable.ofSize(size))
     }

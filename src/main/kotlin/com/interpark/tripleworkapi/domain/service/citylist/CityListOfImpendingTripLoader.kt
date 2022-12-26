@@ -16,14 +16,18 @@ class CityListOfImpendingTripLoader(
     private val tripRepository: TripRepository,
     private val cityRepository: CityRepository
 ) : CityListLoader {
-    override fun loadCityList(size: Int, excludedCityIds: List<CityId>, userId: UserId): List<City> {
+    override fun loadCityList(size: Int, excludedCityIds: List<CityId>, userId: UserId?): List<City> {
         println(this::class.java.simpleName + excludedCityIds.map { it.value })
-        val cityIds = tripRepository.findImpendingTrips(
-            userId = userId,
-            excludedCityIds = excludedCityIds,
-            at = LocalDate.now().minusWeeks(1),
-            pageable = Pageable.ofSize(size)
-        ).map { it.cityId }
-        return cityRepository.findAllById(cityIds)
+        userId?.let {
+            val cityIds = tripRepository.findImpendingTrips(
+                userId = userId,
+                excludedCityIds = excludedCityIds,
+                at = LocalDate.now().minusWeeks(1),
+                pageable = Pageable.ofSize(size)
+            ).map { it.cityId }
+            return cityRepository.findAllById(cityIds)
+        }
+
+        return listOf()
     }
 }

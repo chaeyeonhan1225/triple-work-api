@@ -10,12 +10,14 @@ class User(
     @EmbeddedId
     @AttributeOverride(name = "value", column = Column(name = "id", nullable = false))
     val id: UserId,
+
+    param: UserParam
 ): EntityBase() {
     @Column
-    var email: String = ""
+    var email: String = param.email
 
     @Column
-    var nickname: String = ""
+    var nickname: String = param.nickname
 
     @Column
     var status: CommonState = CommonState.ACTIVE
