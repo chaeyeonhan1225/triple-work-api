@@ -11,6 +11,14 @@ import javax.persistence.*
 
 @Entity
 @Where(clause = "status > 0")
+@Table(
+    indexes = [
+        Index(name = "idx_Trip_userId", columnList = "userId"),
+        Index(name = "idx_Trip_cityId", columnList = "cityId"),
+        Index(name = "idx_Trip_startedAt", columnList = "startedAt"),
+        Index(name = "idx_Trip_endedAt", columnList = "endedAt"),
+    ]
+)
 class Trip(
     @EmbeddedId
     @AttributeOverride(name = "value", column = Column(name = "id", nullable = false))

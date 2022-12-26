@@ -43,7 +43,7 @@ class CityListByUserProvider(
         println("list = ${list.map { it.id.value }}")
 
         return when {
-            list.size > 10 -> list.slice(0..10)
+            list.size > 10 -> list.slice(0..9)
             else -> list
         }
     }

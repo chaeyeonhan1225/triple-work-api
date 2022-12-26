@@ -8,6 +8,12 @@ import javax.persistence.*
 
 @Entity
 @Where(clause = "status > 0")
+@Table(
+    indexes = [
+        Index(name = "idx_City_createdAt", columnList = "createdAt"),
+        Index(name = "idx_City_updatedAt", columnList = "updatedAt")
+    ]
+)
 class City(
     @EmbeddedId
     @AttributeOverride(name = "value", column = Column(name = "id", nullable = false))

@@ -20,7 +20,7 @@ interface CityRepository: JpaRepository<City, CityId> {
     @Query(
         "select c from City as c join Trip as t ON c.id = t.cityId where" +
                 " t.userId = :userId and t.status > 0 and c.status > 0 and " +
-                "t.plan.startedAt <= current_date and t.plan.endedAt >= current_date"
+                "t.plan.startedAt <= current_date and t.plan.endedAt >= current_date order by t.plan.startedAt asc"
     )
     fun findCitiesOfOngoingTrip(@Param("userId") userId: UserId): List<City>
 
