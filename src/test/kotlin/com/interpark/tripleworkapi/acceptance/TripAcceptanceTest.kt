@@ -1,4 +1,4 @@
-package com.interpark.tripleworkapi.controller
+package com.interpark.tripleworkapi.acceptance
 
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.TestConstructor
+import org.springframework.test.context.jdbc.Sql
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
@@ -24,11 +25,12 @@ import java.time.LocalDate
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-class TripIntegrationTest(
+@Sql("classpath:test/data.sql")
+class TripAcceptanceTest(
     private val mockMvc: MockMvc
 ) {
     @Test
-    fun `여행 create`() {
+    fun `여행을 생성한다`() {
         val tripParam = TripParam(
             title = "서울로 떠나는 신나는 여행~",
             cityId = 1,
@@ -51,7 +53,7 @@ class TripIntegrationTest(
     }
 
     @Test
-    fun `여행 create Error (CityNotFound)`() {
+    fun `여행을 생성한다(존재하지 않는 도시)`() {
         val tripParam = TripParam(
             title = "서울로 떠나는 신나는 여행~",
             cityId = 123123123123123,
@@ -74,7 +76,7 @@ class TripIntegrationTest(
     }
 
     @Test
-    fun `여행 create Error (UserNotFound)`() {
+    fun `여행을 생성한다(존재하지 않는 유저)`() {
         val tripParam = TripParam(
             title = "서울로 떠나는 신나는 여행~",
             cityId = 1,
@@ -97,7 +99,7 @@ class TripIntegrationTest(
     }
 
     @Test
-    fun `여행 update`() {
+    fun `여행을 수정한다(id=1)`() {
         val tripParam = TripParam(
             title = "서울로 떠나는 신나는 여행~",
             cityId = 1,
@@ -140,7 +142,7 @@ class TripIntegrationTest(
     }
 
     @Test
-    fun `여행 update Error (CityNotFound)`() {
+    fun `여행을 수정(id=1)한다(존재하지 않는 도시)`() {
         val tripParam = TripParam(
             title = "서울로 떠나는 신나는 여행~",
             cityId = 1,
@@ -177,7 +179,7 @@ class TripIntegrationTest(
     }
 
     @Test
-    fun `여행 update Error (TripNotFound)`() {
+    fun `여행을 수정(id=1)한다(존재하지 않는 여행)`() {
         val tripUpdateParam = TripParam(
             title = "서울로 떠나는 신나는 여행~ - 수정",
             cityId = 1,
@@ -202,7 +204,7 @@ class TripIntegrationTest(
     }
 
     @Test
-    fun `여행 delete`() {
+    fun `여행을 삭제한다`() {
         val tripParam = TripParam(
             title = "서울로 떠나는 신나는 여행~",
             cityId = 1,
@@ -224,7 +226,7 @@ class TripIntegrationTest(
     }
 
     @Test
-    fun `여행 delete Error(TripNotFound)`() {
+    fun `존재하지 않는 여행을 삭제한다`() {
         val tripId = 123123123123
 
         mockMvc.perform(
@@ -235,7 +237,7 @@ class TripIntegrationTest(
     }
 
     @Test
-    fun `여행 select`() {
+    fun `여행(id=1)을 조회한다`() {
         val tripParam = TripParam(
             title = "서울로 떠나는 신나는 여행~",
             cityId = 1,

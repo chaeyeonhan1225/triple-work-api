@@ -1,4 +1,4 @@
-package com.interpark.tripleworkapi.controller
+package com.interpark.tripleworkapi.acceptance
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.interpark.tripleworkapi.domain.city.CityId
@@ -23,12 +23,12 @@ import org.springframework.transaction.annotation.Transactional
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-@Sql("classpath:h2/data.sql")
-class CityIntegrationTest(
+@Sql("classpath:test/data.sql")
+class CityAcceptanceTest(
     private val mockMvc: MockMvc
 ) {
     @Test
-    fun `도시 create`() {
+    fun `도시를 생성한다`() {
         val cityParam = CityParam(
             name = "Seoul",
             countryCode = "KR"
@@ -49,7 +49,7 @@ class CityIntegrationTest(
     }
 
     @Test
-    fun `도시 create - 2`() {
+    fun `도시를 생성한다2`() {
         val cityParam = CityParam(
             name = "Busan",
             countryCode = "KR"
@@ -70,7 +70,7 @@ class CityIntegrationTest(
     }
 
     @Test
-    fun `도시 update - 1`() {
+    fun `도시(id=1)를 수정한다`() {
         val cityUpdateParam = CityParam(
             name = "Seoul - 수정",
             countryCode = "KR"
@@ -92,7 +92,7 @@ class CityIntegrationTest(
     }
 
     @Test
-    fun `도시 update - 2 Error(존재하지 않는 도시 조회)`() {
+    fun `존재하지 않는 도시를 수정한다`() {
         val cityId = "1231241432525"
         val cityUpdateParam = CityParam(
             name = "Seoul - 수정",
@@ -111,7 +111,7 @@ class CityIntegrationTest(
     }
 
     @Test
-    fun `도시 delete - 1`() {
+    fun `도시를 삭제한다`() {
         val cityParam = CityParam(
             name = "Seoul",
             countryCode = "KR"
@@ -142,7 +142,7 @@ class CityIntegrationTest(
     }
 
     @Test
-    fun `도시 delete - 2(도시가 존재하지 않음)`() {
+    fun `존재하지 않는 도시를 삭제한다`() {
         val cityId = CityId(11231241241234)
         mockMvc.perform(
             MockMvcRequestBuilders.delete("/v1/cities/${cityId.value}")

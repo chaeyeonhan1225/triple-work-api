@@ -1,4 +1,4 @@
-package com.interpark.tripleworkapi.controller
+package com.interpark.tripleworkapi.acceptance
 
 import com.interpark.tripleworkapi.application.CityApplication
 import com.interpark.tripleworkapi.application.CityListByUserProvider
