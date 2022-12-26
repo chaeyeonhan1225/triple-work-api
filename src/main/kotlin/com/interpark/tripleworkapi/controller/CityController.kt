@@ -20,8 +20,8 @@ class CityController(
     }
 
     @GetMapping
-    fun findByUser(@RequestParam userId: Long?): List<City> {
-        return cityListByUserProvider.findAllByUser(userId = 1)
+    fun findByUser(@RequestParam userId: Long): List<City> {
+        return cityListByUserProvider.findAllByUser(userId = userId)
     }
 
     @PostMapping

@@ -3,84 +3,48 @@ package com.interpark.tripleworkapi.application
 import com.interpark.tripleworkapi.domain.city.City
 import com.interpark.tripleworkapi.domain.city.CityId
 import com.interpark.tripleworkapi.domain.city.CityRepository
+import com.interpark.tripleworkapi.domain.service.citylist.CityListLoader
 import com.interpark.tripleworkapi.domain.trip.TripRepository
+import com.interpark.tripleworkapi.domain.user.UserId
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import kotlin.math.max
+import kotlin.run as loop
 
 @Service
 @Transactional(readOnly = true)
 class CityListByUserProvider(
-    private val cityRepository: CityRepository,
-    private val tripRepository: TripRepository
+    private val loaders: List<CityListLoader>
 ) {
     fun findAllByUser(userId: Long): List<City> {
-        val sort = CitySort(
-            userId = userId,
-            orderTypes = listOf(
-                CityOrderType.ONGOING_TRIP,
-                CityOrderType.IMPENDING_TRIP,
-                CityOrderType.RECENTLY_CREATED,
-                CityOrderType.RECENTLY_VIEWD,
-                CityOrderType.RANDOM
-            ),
-            limit = 10
-        )
-
+        val maxSize = 10
         val list = mutableListOf<City>()
-        sort.orderTypes.map {
 
+        loop load@{
+            loaders.forEach {
+                val excludedCityIds = list.map {
+                    it.id
+                }
+                val result = it.loadCityList(maxSize, excludedCityIds, UserId(userId))
+                println("result = " + result.map { it.id.value })
+                list.addAll(
+                    result
+                )
+                if (list.size >= 10) {
+                    println("return!!")
+                    return@load
+                }
+            }
         }
-        return listOf()
-    }
 
-    fun findCitiesBySortType(type: CityOrderType) =
-        when (type) {
-            CityOrderType.ONGOING_TRIP -> findOngoingTripCities()
-            CityOrderType.IMPENDING_TRIP -> findImpendingTripCities()
-            CityOrderType.RECENTLY_CREATED -> findRecentCreatedCities()
-            CityOrderType.RECENTLY_VIEWD -> findRecentViewedCities()
-            CityOrderType.RANDOM -> findRandomCities()
-            else -> listOf()
+
+        println("list size = ${list.size}")
+        println("list = ${list.map { it.id.value }}")
+
+        return when {
+            list.size > 10 -> list.slice(0..10)
+            else -> list
         }
-
-
-    fun findOngoingTripCities(): List<City> {
-        val trips = tripRepository.findOngoingTrips()
-        val cityIds = trips.map { it.cityId }
-        return cityRepository.findAllById(cityIds)
     }
-
-    fun findImpendingTripCities(): List<City> {
-        val trips = tripRepository.findImpendingTrips(Pageable.ofSize(10))
-        val cityIds = trips.map { it.cityId }
-        return cityRepository.findAllById(cityIds)
-    }
-
-    fun findRecentCreatedCities(): List<City> {
-        return listOf()
-    }
-
-    fun findRecentViewedCities(): List<City> {
-        return listOf()
-    }
-
-    fun findRandomCities(): List<City> {
-        return listOf()
-    }
-
-}
-
-data class CitySort(
-    val userId: Long,
-    val orderTypes: List<CityOrderType>,
-    val limit: Int
-)
-
-enum class CityOrderType {
-    ONGOING_TRIP,
-    IMPENDING_TRIP,
-    RECENTLY_CREATED,
-    RECENTLY_VIEWD,
-    RANDOM
 }
