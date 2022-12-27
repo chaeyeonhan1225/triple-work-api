@@ -7,7 +7,8 @@ data class TripParam(
     val title: String,
     val cityId: Long,
     val plan: PlanParam,
-    val userId: Long
+    val userId: Long,
+    val tags: List<String>
 )
 
 data class PlanParam(

@@ -63,7 +63,8 @@ class TripApplicationTest {
             title = "테스트 여행",
             cityId = 1,
             plan = PlanParam(startedAt = LocalDate.now(), endedAt = LocalDate.now()),
-            userId = 1
+            userId = 1,
+            tags = listOf()
         )
 
         val newTrip = tripApplication.create(param = testTripParam)
@@ -92,7 +93,8 @@ class TripApplicationTest {
             title = "테스트 여행",
             cityId = 1,
             plan = PlanParam(startedAt = LocalDate.now(), endedAt = LocalDate.now()),
-            userId = 1
+            userId = 1,
+            tags = listOf()
         )
 
         assertThrows<NotFoundException> { tripApplication.create(param = testTripParam) }
@@ -120,7 +122,8 @@ class TripApplicationTest {
             title = "테스트 여행",
             cityId = 1,
             plan = PlanParam(startedAt = LocalDate.now(), endedAt = LocalDate.now()),
-            userId = 1
+            userId = 1,
+            tags = listOf()
         )
 
         assertThrows<NotFoundException> { tripApplication.create(param = testTripParam) }
@@ -148,7 +151,8 @@ class TripApplicationTest {
             title = "테스트 여행",
             cityId = 1,
             plan = PlanParam(startedAt = LocalDate.now(), endedAt = LocalDate.now().minusDays(3)),
-            userId = 1
+            userId = 1,
+            tags = listOf()
         )
 
         assertThrows<InvalidPlanException> { tripApplication.create(param = testTripParam) }

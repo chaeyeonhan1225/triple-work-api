@@ -11,4 +11,5 @@ data class TripView(
     val title = trip.title
     val plan = trip.plan
     val status = trip.status
+    val tags = trip.tags
 }

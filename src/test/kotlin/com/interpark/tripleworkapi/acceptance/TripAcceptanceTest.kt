@@ -38,7 +38,8 @@ class TripAcceptanceTest(
                 startedAt = LocalDate.now(),
                 endedAt = LocalDate.now()
             ),
-            userId = 1
+            userId = 1,
+            tags = listOf("서울", "핫플레이스")
         )
 
         val tripParamJson = jacksonObjectMapper().registerModule(
@@ -61,7 +62,8 @@ class TripAcceptanceTest(
                 startedAt = LocalDate.now(),
                 endedAt = LocalDate.now()
             ),
-            userId = 1
+            userId = 1,
+            tags = listOf("서울", "핫플레이스")
         )
 
         val tripParamJson = jacksonObjectMapper().registerModule(
@@ -84,7 +86,8 @@ class TripAcceptanceTest(
                 startedAt = LocalDate.now(),
                 endedAt = LocalDate.now()
             ),
-            userId = 123123123
+            userId = 123123123,
+            tags = listOf("서울", "핫플레이스")
         )
 
         val tripParamJson = jacksonObjectMapper().registerModule(
@@ -107,7 +110,8 @@ class TripAcceptanceTest(
                 startedAt = LocalDate.now(),
                 endedAt = LocalDate.now()
             ),
-            userId = 1
+            userId = 1,
+            tags = listOf("서울", "핫플레이스")
         )
 
         createTestTrip(tripParam)
@@ -119,7 +123,8 @@ class TripAcceptanceTest(
                 startedAt = LocalDate.now(),
                 endedAt = LocalDate.now()
             ),
-            userId = 1
+            userId = 1,
+            tags = listOf("서울", "핫플레이스")
         )
 
         val tripUpdateParamJson = jacksonObjectMapper().registerModule(
@@ -150,7 +155,8 @@ class TripAcceptanceTest(
                 startedAt = LocalDate.now(),
                 endedAt = LocalDate.now()
             ),
-            userId = 1
+            userId = 1,
+            tags = listOf("서울", "핫플레이스")
         )
 
         createTestTrip(tripParam)
@@ -162,7 +168,8 @@ class TripAcceptanceTest(
                 startedAt = LocalDate.now(),
                 endedAt = LocalDate.now()
             ),
-            userId = 1
+            userId = 1,
+            tags = listOf()
         )
 
         val tripUpdateParamJson = jacksonObjectMapper().registerModule(
@@ -187,7 +194,8 @@ class TripAcceptanceTest(
                 startedAt = LocalDate.now(),
                 endedAt = LocalDate.now()
             ),
-            userId = 1
+            userId = 1,
+            tags = listOf("서울", "핫플레이스")
         )
 
         val tripUpdateParamJson = jacksonObjectMapper().registerModule(
@@ -212,7 +220,8 @@ class TripAcceptanceTest(
                 startedAt = LocalDate.now(),
                 endedAt = LocalDate.now()
             ),
-            userId = 1
+            userId = 1,
+            tags = listOf("서울", "핫플레이스")
         )
 
         createTestTrip(tripParam)
@@ -245,7 +254,8 @@ class TripAcceptanceTest(
                 startedAt = LocalDate.now(),
                 endedAt = LocalDate.now()
             ),
-            userId = 1
+            userId = 1,
+            tags = listOf("서울", "핫플레이스")
         )
 
         createTestTrip(tripParam)
