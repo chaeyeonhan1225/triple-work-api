@@ -11,19 +11,46 @@
 ### 도시(City)
 1. 도시를 등록한다. 
    ```http request
-   POST "http://localhost:{port}/v1/cities
+   POST "http://localhost:{port}/v1/cities"
    ```
 2. 도시를 수정한다.
+   ```http request
+   PUT "http://localhost:{port}/v1/cities/{id}"
+   ```
 3. 도시를 삭제한다.
+   ```http request
+   DELETE "http://localhost:{port}/v1/cities/{id}"
+   ```
 4. 도시 하나를 조회한다.
+    ```http request
+   GET "http://localhost:{port}/v1/cities/{id}"
+   ```
 5. 사용자별 도시 리스트를 조회한다.
+     ```http request
+   GET "http://localhost:{port}/v1/cities?userId={userId}"
+   ```
 ### 여행(Trip)
 1. 여행을 등록한다.
+     ```http request
+   POST "http://localhost:{port}/v1/trips"
+   ```
 2. 여행을 수정한다.
+    ```http request
+   PUT "http://localhost:{port}/v1/trips/{id}"
+   ```
 3. 여행을 삭제한다.
+    ```http request
+   DELETE "http://localhost:{port}/v1/trips/{id}"
+   ```
 4. 여행 하나를 조회한다.
+    ```http request
+   GET "http://localhost:{port}/v1/trips/{id}"
+   ```
 ### 유저(User)
 1. 유저를 등록한다.
+    ```http request
+   POST "http://localhost:{port}/v1/users/{id}"
+   ```
 ## 사전 준비
 Local MySQL에 `Triple`이라는 이름의 데이터베이스를 생성합니다.
 ## 설정
@@ -31,12 +58,11 @@ Local MySQL에 `Triple`이라는 이름의 데이터베이스를 생성합니다
 
 - **환경별 포트 번호**
 
-
-  | environment | port |
-       |------|------|
-  | test        | 8080 |
-  | development | 3000 |
-  | production  | 6080 |
+| environment | port |
+|------|------|
+| test        | 8080 |
+| development | 3000 |
+| production  | 6080 |
 
 - DB 설정 정보(production)
   ```yaml
