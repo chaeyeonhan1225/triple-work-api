@@ -9,7 +9,10 @@
 ![](triple-work.drawio.png)
 ## 유즈 케이스
 ### 도시(City)
-1. 도시를 등록한다.
+1. 도시를 등록한다. 
+   ```http request
+   POST "http://localhost:{port}/v1/cities
+   ```
 2. 도시를 수정한다.
 3. 도시를 삭제한다.
 4. 도시 하나를 조회한다.
@@ -27,6 +30,7 @@ Local MySQL에 `Triple`이라는 이름의 데이터베이스를 생성합니다
 
 
 - **환경별 포트 번호**
+
 
   | environment | port |
        |------|------|
