@@ -58,11 +58,11 @@ Local MySQL에 `TripleWork`이라는 이름의 데이터베이스를 생성합�
 
 - **환경별 포트 번호**
 
-| environment | port |
-|------|------|
-| test        | 8080 |
-| development | 3000 |
-| production  | 6080 |
+   | environment | port |
+   |------|------|
+   | test        | 8080 |
+   | development | 3000 |
+   | production  | 6080 |
 
 - DB 설정 정보(production)
   ```yaml
