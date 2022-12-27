@@ -5,6 +5,8 @@
 - JPA
 - DDD
 
+## 클래스 다이어그램
+![](triple-work.drawio.png)
 ## 유즈 케이스
 ### 도시(City)
 1. 도시를 등록한다.
@@ -32,7 +34,7 @@ Local MySQL에 `Triple`이라는 이름의 데이터베이스를 생성합니다
   | development | 3000 |
   | production  | 6080 |
 
-- DB 설정 정보
+- DB 설정 정보(production)
   ```yaml
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
