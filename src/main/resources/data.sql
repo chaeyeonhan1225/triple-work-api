@@ -6,13 +6,13 @@
 -- SET FOREIGN_KEY_CHECKS = 1;
 
 
-INSERT INTO CITY (id, name, countryCode, status, version, createdAt, updatedAt)
+INSERT INTO CITY (id, name, countryCode, latitude, longitude, status, version, createdAt, updatedAt)
 VALUES
-    (1, 'Busan', 'KR', 1, 0, '2022-01-01T00:00:00', CURRENT_DATE),
-    (2, 'Seoul', 'KR', 1, 0, '2022-01-01T00:00:00', CURRENT_DATE),
-    (3, 'NewYork', 'KR', 1, 0, '2022-01-01T00:00:00', CURRENT_DATE),
-    (4, 'Tokyo', 'KR', 1, 0, '2022-01-01T00:00:00', CURRENT_DATE),
-    (5, 'London', 'KR', 1, 0, '2022-01-01T00:00:00', CURRENT_DATE);
+    (1, 'Busan', 'KR', 35.179554, 129.075638,  1, 0, '2022-01-01T00:00:00', CURRENT_DATE),
+    (2, 'Seoul', 'KR', 37.566536, 126.977966, 1, 0, '2022-01-01T00:00:00', CURRENT_DATE),
+    (3, 'NewYork', 'KR', 40.712776, -74.005974,  1, 0, '2022-01-01T00:00:00', CURRENT_DATE),
+    (4, 'Tokyo', 'KR', 35.689487, 139.691711, 1, 0, '2022-01-01T00:00:00', CURRENT_DATE),
+    (5, 'London', 'KR', 51.509865, -0.118092, 1, 0,'2022-01-01T00:00:00', CURRENT_DATE);
 
 INSERT INTO "User" (id, email, nickname, status, version, createdAt, updatedAt)
 VALUES

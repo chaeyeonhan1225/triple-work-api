@@ -1,13 +1,7 @@
-package com.interpark.tripleworkapi.domain.param
+package com.interpark.tripleworkapi.domain.trip
 
-import com.fasterxml.jackson.annotation.JsonFormat
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer
-import com.interpark.tripleworkapi.domain.user.UserId
 import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.util.Date
 
 data class TripParam(
     val title: String,

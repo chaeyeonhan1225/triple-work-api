@@ -4,7 +4,7 @@ import com.interpark.tripleworkapi.application.CityApplication
 import com.interpark.tripleworkapi.application.CityListByUserProvider
 import com.interpark.tripleworkapi.application.CityProvider
 import com.interpark.tripleworkapi.domain.city.City
-import com.interpark.tripleworkapi.domain.param.CityParam
+import com.interpark.tripleworkapi.domain.city.CityParam
 import org.springframework.web.bind.annotation.*
 
 @RestController

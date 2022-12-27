@@ -27,20 +27,15 @@ class CityListByUserProvider(
                     it.id
                 }
                 val result = it.loadCityList(maxSize, excludedCityIds, userId?.let { UserId(userId) })
-                println("result = " + result.map { it.id.value })
+
                 list.addAll(
                     result
                 )
                 if (list.size >= 10) {
-                    println("return!!")
                     return@load
                 }
             }
         }
-
-
-        println("list size = ${list.size}")
-        println("list = ${list.map { it.id.value }}")
 
         return when {
             list.size > 10 -> list.slice(0..9)

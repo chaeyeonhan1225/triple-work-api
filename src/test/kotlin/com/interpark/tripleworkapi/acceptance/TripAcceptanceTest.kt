@@ -3,8 +3,8 @@ package com.interpark.tripleworkapi.acceptance
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.interpark.tripleworkapi.domain.common.CommonState
-import com.interpark.tripleworkapi.domain.param.PlanParam
-import com.interpark.tripleworkapi.domain.param.TripParam
+import com.interpark.tripleworkapi.domain.trip.PlanParam
+import com.interpark.tripleworkapi.domain.trip.TripParam
 import io.mockk.InternalPlatformDsl.toStr
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc

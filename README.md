@@ -5,8 +5,6 @@
 - JPA
 - DDD
 
-## ERD
-
 ## 유즈 케이스
 ### 도시(City)
 1. 도시를 등록한다.
@@ -23,6 +21,26 @@
 1. 유저를 등록한다.
 ## 사전 준비
 Local MySQL에 `Triple`이라는 이름의 데이터베이스를 생성합니다.
+## 설정
+
+
+- **환경별 포트 번호**
+
+  | environment | port |
+       |------|------|
+  | test        | 8080 |
+  | development | 3000 |
+  | production  | 6080 |
+
+- DB 설정 정보
+  ```yaml
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/Triple?serverTimezone=UTC&useCursors=false&sendStringParametersAsUnicode=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false
+    username: root
+    password:
+   ```
+  
 ## 실행 방법
 1. `git clone`으로 프로젝트를 다운받습니다.
    ```bash
@@ -41,11 +59,4 @@ Local MySQL에 `Triple`이라는 이름의 데이터베이스를 생성합니다
 5. spring-docs에서 테스트할 수 있습니다.
    - `localhost:<port>/swagger-ui.html`
 
-**환경별 포트 번호**
-
-| environment | port |
-|-------------|------|
-| test        | 8080 |
-| development | 3000 |
-| production  | 8080 |
 

@@ -1,14 +1,11 @@
 package com.interpark.tripleworkapi.application
 
-import com.interpark.tripleworkapi.domain.city.City
-import com.interpark.tripleworkapi.domain.city.CityId
-import com.interpark.tripleworkapi.domain.city.CityRepository
+import com.interpark.tripleworkapi.domain.city.*
 import com.interpark.tripleworkapi.domain.exception.NotFoundException
 import com.interpark.tripleworkapi.domain.exception.InvalidPlanException
 import com.interpark.tripleworkapi.domain.trip.TripRepository
-import com.interpark.tripleworkapi.domain.param.CityParam
-import com.interpark.tripleworkapi.domain.param.PlanParam
-import com.interpark.tripleworkapi.domain.param.TripParam
+import com.interpark.tripleworkapi.domain.trip.PlanParam
+import com.interpark.tripleworkapi.domain.trip.TripParam
 import com.interpark.tripleworkapi.domain.service.SequenceGenerator
 import com.interpark.tripleworkapi.domain.trip.Trip
 import com.interpark.tripleworkapi.domain.user.UserId
@@ -38,7 +35,11 @@ class TripApplicationTest {
     fun `trip create 성공 테스트`() {
         val mockCity = City(
             id = CityId(1),
-            param = CityParam(name = "Seoul", countryCode = "KR")
+            param = CityParam(
+                name = "Seoul", countryCode = "KR", geoPoint = GeoPointParam(
+                    37.566536, 126.977966
+                )
+            )
         )
 
         every {

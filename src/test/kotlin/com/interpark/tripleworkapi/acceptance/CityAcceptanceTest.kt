@@ -3,7 +3,8 @@ package com.interpark.tripleworkapi.acceptance
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.interpark.tripleworkapi.domain.city.CityId
 import com.interpark.tripleworkapi.domain.common.CommonState
-import com.interpark.tripleworkapi.domain.param.CityParam
+import com.interpark.tripleworkapi.domain.city.CityParam
+import com.interpark.tripleworkapi.domain.city.GeoPointParam
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
@@ -31,7 +32,10 @@ class CityAcceptanceTest(
     fun `도시를 생성한다`() {
         val cityParam = CityParam(
             name = "Seoul",
-            countryCode = "KR"
+            countryCode = "KR",
+            geoPoint = GeoPointParam(
+                37.566536, 126.977966
+            )
         )
         val cityParamJson = jacksonObjectMapper().writeValueAsString(cityParam)
 
@@ -52,7 +56,10 @@ class CityAcceptanceTest(
     fun `도시를 생성한다2`() {
         val cityParam = CityParam(
             name = "Busan",
-            countryCode = "KR"
+            countryCode = "KR",
+            geoPoint = GeoPointParam(
+                37.566536, 126.977966
+            )
         )
         val cityParamJson = jacksonObjectMapper().writeValueAsString(cityParam)
 
@@ -73,7 +80,10 @@ class CityAcceptanceTest(
     fun `도시(id=1)를 수정한다`() {
         val cityUpdateParam = CityParam(
             name = "Seoul - 수정",
-            countryCode = "KR"
+            countryCode = "KR",
+            geoPoint = GeoPointParam(
+                37.566536, 126.977966
+            )
         )
         val cityUpdateParamJson = jacksonObjectMapper().writeValueAsString(cityUpdateParam)
 
@@ -96,7 +106,10 @@ class CityAcceptanceTest(
         val cityId = "1231241432525"
         val cityUpdateParam = CityParam(
             name = "Seoul - 수정",
-            countryCode = "KR"
+            countryCode = "KR",
+            geoPoint = GeoPointParam(
+                37.566536, 126.977966
+            )
         )
         val cityUpdateParamJson = jacksonObjectMapper().writeValueAsString(cityUpdateParam)
 
@@ -114,7 +127,10 @@ class CityAcceptanceTest(
     fun `도시를 삭제한다`() {
         val cityParam = CityParam(
             name = "Seoul",
-            countryCode = "KR"
+            countryCode = "KR",
+            geoPoint = GeoPointParam(
+                37.566536, 126.977966
+            )
         )
         val cityParamJson = jacksonObjectMapper().writeValueAsString(cityParam)
 

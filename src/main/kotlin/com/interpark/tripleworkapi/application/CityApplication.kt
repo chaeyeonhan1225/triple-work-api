@@ -3,12 +3,10 @@ package com.interpark.tripleworkapi.application
 import com.interpark.tripleworkapi.domain.city.City
 import com.interpark.tripleworkapi.domain.city.CityId
 import com.interpark.tripleworkapi.domain.city.CityRepository
-import com.interpark.tripleworkapi.domain.exception.CityUnableDeleteException
 import com.interpark.tripleworkapi.domain.exception.NotFoundException
-import com.interpark.tripleworkapi.domain.param.CityParam
+import com.interpark.tripleworkapi.domain.city.CityParam
 import com.interpark.tripleworkapi.domain.service.CityDeleteService
 import com.interpark.tripleworkapi.domain.service.SequenceGenerator
-import com.interpark.tripleworkapi.domain.trip.TripRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

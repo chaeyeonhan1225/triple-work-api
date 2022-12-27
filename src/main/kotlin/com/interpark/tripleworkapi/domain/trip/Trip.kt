@@ -4,7 +4,6 @@ package com.interpark.tripleworkapi.domain.trip
 import com.interpark.tripleworkapi.domain.city.CityId
 import com.interpark.tripleworkapi.domain.common.CommonState
 import com.interpark.tripleworkapi.domain.common.EntityBase
-import com.interpark.tripleworkapi.domain.param.TripParam
 import com.interpark.tripleworkapi.domain.user.UserId
 import org.hibernate.annotations.Where
 import javax.persistence.*

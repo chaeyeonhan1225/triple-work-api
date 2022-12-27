@@ -3,7 +3,7 @@ package com.interpark.tripleworkapi.controller
 import com.interpark.tripleworkapi.application.TripApplication
 import com.interpark.tripleworkapi.application.TripProvider
 import com.interpark.tripleworkapi.domain.trip.Trip
-import com.interpark.tripleworkapi.domain.param.TripParam
+import com.interpark.tripleworkapi.domain.trip.TripParam
 import com.interpark.tripleworkapi.domain.trip.TripView
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping

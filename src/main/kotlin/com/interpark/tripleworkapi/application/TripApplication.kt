@@ -5,7 +5,7 @@ import com.interpark.tripleworkapi.domain.city.CityRepository
 import com.interpark.tripleworkapi.domain.exception.NotFoundException
 import com.interpark.tripleworkapi.domain.trip.Trip
 import com.interpark.tripleworkapi.domain.trip.TripRepository
-import com.interpark.tripleworkapi.domain.param.TripParam
+import com.interpark.tripleworkapi.domain.trip.TripParam
 import com.interpark.tripleworkapi.domain.service.SequenceGenerator
 import com.interpark.tripleworkapi.domain.trip.TripId
 import com.interpark.tripleworkapi.domain.user.UserId

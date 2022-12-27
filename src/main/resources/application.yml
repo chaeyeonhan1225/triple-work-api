@@ -13,6 +13,7 @@ spring:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
     show-sql: true
     defer-datasource-initialization: true
+    open-in-view: false
   h2:
     console:
       enabled: true
@@ -44,6 +45,7 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
     show-sql: true
+    open-in-view: false
   h2:
     console:
       enabled: true
@@ -79,6 +81,7 @@ spring:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
     show-sql: false
     defer-datasource-initialization: true
+    open-in-view: false
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/Triple?serverTimezone=UTC&useCursors=false&sendStringParametersAsUnicode=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false
@@ -89,3 +92,5 @@ springdoc:
     - /v1//cities/**
     - /v1//trips/**
     - /v1//users/**
+server:
+  port: 6080
