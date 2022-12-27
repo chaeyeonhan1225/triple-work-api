@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Repository
@@ -24,13 +23,6 @@ interface CityRepository: JpaRepository<City, CityId> {
     )
     fun findCitiesOfOngoingTrip(@Param("userId") userId: UserId): List<City>
 
-//    @Query(
-//        "select distinct c, t.plan.startedAt from City as c join Trip as t ON c.id = t.cityId where" +
-//                " t.userId = :userId and t.status > 0 and c.status > 0 and" +
-//                " t.plan.startedAt > current_date and t.plan.startedAt >= :at and" +
-//                " c.id not in :excludedCityIds order by t.plan.startedAt"
-//    )
-//    fun findCitiesOfImpendingTrip(): List<City>
 
     @Query(
         "select c from City as c where c.id " +
