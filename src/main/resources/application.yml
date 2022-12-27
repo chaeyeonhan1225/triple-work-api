@@ -84,7 +84,7 @@ spring:
     open-in-view: false
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/Triple?serverTimezone=UTC&useCursors=false&sendStringParametersAsUnicode=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/TripleWork?serverTimezone=UTC&useCursors=false&sendStringParametersAsUnicode=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false
     username: root
     password:
 springdoc:

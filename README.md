@@ -51,8 +51,8 @@
     ```http request
    POST "http://localhost:{port}/v1/users/{id}"
    ```
-## 사전 준비
-Local MySQL에 `Triple`이라는 이름의 데이터베이스를 생성합니다.
+## 사전 준비(production)
+Local MySQL에 `TripleWork`이라는 이름의 데이터베이스를 생성합니다.
 ## 설정
 
 
