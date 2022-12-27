@@ -22,7 +22,7 @@ import java.time.LocalDate
 
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @Transactional
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @Sql("classpath:test/data.sql")
@@ -124,7 +124,7 @@ class TripAcceptanceTest(
                 endedAt = LocalDate.now()
             ),
             userId = 1,
-            tags = listOf("서울", "핫플레이스")
+            tags = listOf("수정")
         )
 
         val tripUpdateParamJson = jacksonObjectMapper().registerModule(
@@ -142,7 +142,8 @@ class TripAcceptanceTest(
                 MockMvcResultMatchers.jsonPath("\$.id").value(1),
                 MockMvcResultMatchers.jsonPath("\$.title").value(tripUpdateParam.title),
                 MockMvcResultMatchers.jsonPath("\$.status").value(CommonState.ACTIVE.label),
-                MockMvcResultMatchers.jsonPath("\$.cityId").value(tripUpdateParam.cityId)
+                MockMvcResultMatchers.jsonPath("\$.cityId").value(tripUpdateParam.cityId),
+                MockMvcResultMatchers.jsonPath("\$.tags[0]").value(tripUpdateParam.tags[0])
             )
     }
 
